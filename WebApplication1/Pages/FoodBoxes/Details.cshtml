@@ -1,0 +1,51 @@
+﻿@page
+@model WebApplication1.Pages.FoodBoxes.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>FoodBox</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FoodBox.TypeOfFood)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FoodBox.TypeOfFood)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FoodBox.FoodName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FoodBox.FoodName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FoodBox.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FoodBox.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FoodBox.Purchase)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FoodBox.Purchase.User.PrivateInfo.Email)<br/>
+            @Html.DisplayFor(model => model.FoodBox.Purchase.User.PrivateInfo.FullName)<br/>
+            @Html.DisplayFor(model => model.FoodBox.Purchase.DateOfPurchase)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FoodBox.Restaurant)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FoodBox.Restaurant.RestaurantName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.FoodBox.FoodboxId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
