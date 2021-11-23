@@ -56,14 +56,20 @@ public class UserBackend
             });
         ctx.SaveChanges();
     }
-
-    /*public User GetUserInfo()
+    /// <summary>
+    /// Tar fram info om den inloggade usern.
+    /// </summary>
+    /// <returns>Ett user objekt</returns>
+    public User GetUserInfo()
     {
         using var ctx = new FoodRescue_DbContext();
 
         return ctx.Users.Find(_userId);
-    }*/
-
+    }
+    /// <summary>
+    /// Tar fram en lista med köphistoriken för den inloggade usern.
+    /// </summary>
+    /// <returns>En lista med köphistorik i form av en UserPurchaseHistoryDto</returns>
     public List<UserPurchaseHistoryDto> PurchaseHistory()
     {
         using var ctx = new FoodRescue_DbContext();
