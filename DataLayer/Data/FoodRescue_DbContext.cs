@@ -19,7 +19,7 @@ public class FoodRescue_DbContext : DbContext
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder
-                .UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=FoodRescue_inlamning_2");
+                .UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=FoodRescue_ProjektArbete");
         }
     }
 
