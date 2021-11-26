@@ -9,7 +9,7 @@ namespace DataLayer.Backend;
 
 public class LoginBackend
 {
-    public User Login(string username, string password)
+    public User LoginCostumerUser(string username, string password)
     {
         using var ctx = new FoodRescue_DbContext();
 
@@ -22,9 +22,17 @@ public class LoginBackend
         
         return user;
     }
+
+    public User LoginRestaurantUser(string username, string password)
+    {
+        var user = LoginCostumerUser(username, password);
+        if (user.Restaurant == null) throw new LoginException();
+
+        return user;
+    }
 }
 
-internal class LoginException : Exception
+public class LoginException : Exception
 {
     public LoginException()
     {
