@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.IO.Compression;
 using DataLayer.Model;
 
 
 namespace DataLayer.Data;
-//TODO Ändra till internal när du har fixat i webappen
+
 public class FoodRescue_DbContext : DbContext
 {
     public DbSet<FoodBox> FoodBoxes { get; set; }
@@ -19,7 +18,7 @@ public class FoodRescue_DbContext : DbContext
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder
-                .UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=FoodRescue_inlamning_2");
+                .UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=FoodRescue_ProjektArbete");
         }
     }
 
@@ -38,20 +37,22 @@ public class FoodRescue_DbContext : DbContext
     {
         var userPrivateInfos = new UserPrivateInfo[]
         {
-            new() { Email = "Kim.bjornsen@hotmail.com", FirstName = "Kim", LastName = "Björnsen Åklint" },
-            new() { Email = "Pia@hotmail.com", FirstName = "Pia", LastName = "Hagman" },
-            new() {  Email = "Johan@hotmail.com", FirstName = "Johan", LastName = "Fahlgren" }
+            new() { Email = "Kim.bjornsen@hotmail.com", FirstName = "Kim", LastName = "Björnsen Åklint", Password = "Password1"},
+            new() { Email = "Pia@hotmail.com", FirstName = "Pia", LastName = "Hagman", Password = "Password1" },
+            new() {  Email = "Johan@hotmail.com", FirstName = "Johan", LastName = "Fahlgren", Password = "Password1" },
+            new() {  Email = "Server@Mcdonalds.com", FirstName = "Server1", LastName = "", Password = "Password1MCD" }
         };
         var users = new User[]
         {
             new() {PrivateInfo = userPrivateInfos[0]},
             new() {PrivateInfo = userPrivateInfos[1]},
-            new() {PrivateInfo = userPrivateInfos[2]}
+            new() {PrivateInfo = userPrivateInfos[2]},
+            new() {PrivateInfo = userPrivateInfos[3]}
         };
-
+        Users.AddRange(users);
         var restaurants = new Restaurant[]
         {
-            new() { RestaurantName = "Mcdonalds", PhoneNumber = "0700 - 82 32 11" },
+            new() { RestaurantName = "Mcdonalds", PhoneNumber = "0700 - 82 32 11", Users = new[] {users[3]}},
             new() { RestaurantName = "Burger King", PhoneNumber = "0700 - 82 32 12" },
             new() { RestaurantName = "Max Burgers", PhoneNumber = "0700 - 82 32 13" }
         };

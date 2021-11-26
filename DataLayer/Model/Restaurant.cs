@@ -20,6 +20,8 @@ public class Restaurant
     [Display(Name = "Phone Number")]
     public string PhoneNumber { get; set; }
 
+    public ICollection<User> Users { get; set; }
+
     public ICollection<FoodBox> FoodBoxes { get; set; }
 
     public override string ToString() => $"Restaurant name: {RestaurantName}\t Phone number: {PhoneNumber}";

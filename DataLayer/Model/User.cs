@@ -7,6 +7,7 @@ public class User
 {
     [Display(Name = "User id")]
     public int UserId { get; set; }
+    public Restaurant Restaurant { get; set; }
     public ICollection<Sale> Sales { get; set; }
     public UserPrivateInfo PrivateInfo { get; set; }
     public override string ToString()
