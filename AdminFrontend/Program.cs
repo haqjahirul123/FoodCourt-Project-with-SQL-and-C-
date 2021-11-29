@@ -84,6 +84,100 @@ void CreateDatabase()
     admin.CreateAndSeedDb();
 }
 
+void ResetDatabasePrompt()
+{
+    var admin = new AdminBackend();
+    while (true)
+    {
+        Console.Clear();
+        string prompt = "All changes and additions will be deleted and the database will be reset to its default state\n" +
+                        "Are you sure you want to reset the database?";
+
+        bool answer = YesNoPrompt(prompt, true);
+
+        if (answer)
+        {
+            admin.CreateAndSeedDb();
+
+            Console.WriteLine("Database has been reset!");
+            ReturnToMainMenuPrompt();
+            break;
+        }
+
+        if (!answer)
+        {
+            Console.Clear();
+
+            Console.WriteLine("No changes has been made to the database");
+            ReturnToMainMenuPrompt();
+            break;
+        }
+    }
+}
+
+void DisplayAllUsers()
+{
+    var admin = new AdminBackend();
+
+    Console.Clear();
+
+    Console.WriteLine("Users on record:\n");
+
+    var users = admin.GetUsers();
+    foreach (var user in users)
+    {
+        Console.WriteLine(user);
+    }
+
+    ReturnToMainMenuPrompt();
+}
+
+void DisplayAllRestaurants()
+{
+    var admin = new AdminBackend();
+
+    Console.Clear();
+
+    Console.WriteLine("Restaurants on record:\n");
+
+    var restaurants = admin.GetRestaurants();
+    foreach (var restaurant in restaurants)
+    {
+        Console.WriteLine(restaurant);
+    }
+
+    ReturnToMainMenuPrompt();
+}
+
+void AddRestaurantRecord()
+{
+    //TODO Add restaurant record
+}
+
+bool ContinueProgramPrompt()
+{
+    while (true)
+    {
+        Console.Clear();
+
+        string prompt = "Are you sure you want to exit the program?";
+        bool answer = YesNoPrompt(prompt, true);
+
+        if (answer)
+        {
+            return false;
+        }
+
+        if (!answer)
+        {
+            ReturnToMainMenuPrompt();
+            return true;
+        }
+
+        Console.Clear();
+    }
+}
+
 bool YesNoPrompt(string outputPrompt, bool clearConsole)
 {
     while (true)
@@ -117,77 +211,8 @@ bool YesNoPrompt(string outputPrompt, bool clearConsole)
     }
 }
 
-void ResetDatabasePrompt()
+void ReturnToMainMenuPrompt()
 {
-    var admin = new AdminBackend();
-    while (true)
-    {
-        Console.Clear();
-        string prompt = "All changes and additions will be deleted and the database will be reset to its default state\n" +
-                        "Are you sure you want to reset the database?";
-
-        bool answer = YesNoPrompt(prompt, true);
-
-        if (answer)
-        {
-            admin.CreateAndSeedDb();
-
-            Console.WriteLine("Database has been reset!\n" +
-                              "Please press enter to return to the menu");
-
-            Console.ReadLine();
-            break;
-        }
-
-        if (!answer)
-        {
-            Console.Clear();
-
-            Console.WriteLine("No changes has been made to the database\n" +
-                              "Please press enter to return to the menu");
-            Console.ReadLine();
-            break;
-        }
-    }
-}
-
-bool ContinueProgramPrompt()
-{
-    while (true)
-    {
-        Console.Clear();
-
-        string prompt = "Are you sure you want to exit the program?";
-        bool answer = YesNoPrompt(prompt, true);
-
-        if (answer)
-        {
-            return false;
-        }
-
-        if (!answer)
-        {
-            Console.WriteLine("Please press enter to return to the menu");
-
-            Console.ReadLine();
-            return true;
-        }
-
-        Console.Clear();
-    }
-}
-
-void DisplayAllUsers()
-{
-    //TODO Display all users
-}
-
-void DisplayAllRestaurants()
-{
-    //TODO Display all restaurants
-}
-
-void AddRestaurantRecord()
-{
-    //TODO Add restaurant record
+    Console.WriteLine("\nPlease press enter to return to the menu");
+    Console.ReadLine();
 }
