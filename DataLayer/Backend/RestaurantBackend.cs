@@ -13,8 +13,11 @@ namespace DataLayer.Backend;
 public class RestaurantBackend
 {
     private readonly int _restaurantId;
-    public RestaurantBackend(int restaurantId)
+    private readonly string _databaseName;
+
+    public RestaurantBackend(int restaurantId, string databaseName)
     {
+        _databaseName = databaseName;
         _restaurantId = restaurantId;
     }
 
@@ -24,7 +27,7 @@ public class RestaurantBackend
     /// <returns> En lista med sålda foodboxes för inloggade restaurangen </returns>
     public List<FoodBox> GetSoldFoodBoxes()
     {
-        using var ctx = new FoodRescue_DbContext();
+        using var ctx = new FoodRescue_DbContext(_databaseName);
 
         var query = ctx.FoodBoxes
             .Include(f=>f.Restaurant)
@@ -42,7 +45,7 @@ public class RestaurantBackend
     /// <param name="price"> Priset i kronor </param>
     public void AddFoodBox(string foodName, string typeOfFood, decimal price)
     {
-        using var ctx = new FoodRescue_DbContext();
+        using var ctx = new FoodRescue_DbContext(_databaseName);
         
             var restaurant = ctx.Restaurants
                 .FirstOrDefault(r => r.RestaurantId == _restaurantId);
@@ -66,7 +69,7 @@ public class RestaurantBackend
     /// <returns> En lista med med alla matlådor på den inloggade restaurangen </returns>
     public List<FoodBox> GetAllFoodBoxes()
     {
-        using var ctx = new FoodRescue_DbContext();
+        using var ctx = new FoodRescue_DbContext(_databaseName);
 
         var query = ctx.FoodBoxes
             .Include(f => f.Restaurant)
@@ -84,7 +87,7 @@ public class RestaurantBackend
     /// <returns> Ett anonymt objekt med förtjänten (i kronor) och antalet sålda food boxes </returns>
     public RestaurantProfitDto GetProfit(int month, int year)
     {
-        using var ctx = new FoodRescue_DbContext();
+        using var ctx = new FoodRescue_DbContext(_databaseName);
 
         var query = ctx.FoodBoxes
             .Where(f => f.Restaurant.RestaurantId == _restaurantId
@@ -104,7 +107,7 @@ public class RestaurantBackend
     /// <returns> Ett Restaurant objekt </returns>
     public Restaurant GetLoggedInRestaurantInfo()
     {
-        using var ctx = new FoodRescue_DbContext();
+        using var ctx = new FoodRescue_DbContext(_databaseName);
 
         return ctx.Restaurants.Find(_restaurantId);
     }

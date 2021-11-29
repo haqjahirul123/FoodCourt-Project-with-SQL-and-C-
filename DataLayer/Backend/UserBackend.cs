@@ -13,8 +13,10 @@ namespace DataLayer.Backend;
 public class UserBackend
 {
     private readonly int _userId;
-    public UserBackend(int userId)
+    private readonly string _databaseName;
+    public UserBackend(int userId, string databaseName)
     {
+        _databaseName = databaseName;
         _userId = userId;
     }
     /// <summary>
@@ -24,7 +26,7 @@ public class UserBackend
     /// <returns> En lista av osålda food boxes av typen i "typeOfFood" </returns>
     public List<FoodBox> GetUnsoldFoodBoxes(string typeOfFood)
     {
-        using var ctx = new FoodRescue_DbContext();
+        using var ctx = new FoodRescue_DbContext(_databaseName);
 
         var query = ctx.FoodBoxes
                 .Include(f => f.Restaurant)
@@ -39,7 +41,7 @@ public class UserBackend
     /// <param name="foodBoxId">Vilket Id foodboxen man vill köpa har</param>
     public void BuyFoodBox(int foodBoxId)
     {
-        using var ctx = new FoodRescue_DbContext();
+        using var ctx = new FoodRescue_DbContext(_databaseName);
         var foodBox = ctx.FoodBoxes
             .Find(foodBoxId);
         if(foodBox == null) throw new Exception("There is no foodbox with that id");
@@ -62,7 +64,7 @@ public class UserBackend
     /// <returns>Ett user objekt</returns>
     public User GetUserInfo()
     {
-        using var ctx = new FoodRescue_DbContext();
+        using var ctx = new FoodRescue_DbContext(_databaseName);
 
         return ctx.Users.Find(_userId);
     }
@@ -72,7 +74,7 @@ public class UserBackend
     /// <returns>En lista med köphistorik i form av en UserPurchaseHistoryDto</returns>
     public List<UserPurchaseHistoryDto> PurchaseHistory()
     {
-        using var ctx = new FoodRescue_DbContext();
+        using var ctx = new FoodRescue_DbContext(_databaseName);
 
         var query = ctx.Sales
             .Where(s => s.User.UserId == _userId)

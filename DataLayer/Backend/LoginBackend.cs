@@ -9,26 +9,40 @@ namespace DataLayer.Backend;
 
 public class LoginBackend
 {
-    public User LoginCostumerUser(string username, string password)
+    private readonly string _databaseName;
+    public LoginBackend(string databaseName)
     {
-        using var ctx = new FoodRescue_DbContext();
+        _databaseName = databaseName;
+    }
+    public User LoginCustomerUser(string username, string password)
+    {
+        using var ctx = new FoodRescue_DbContext(_databaseName);
 
         var user = ctx.Users
             .Include(u => u.PrivateInfo)
             .Include(u => u.Restaurant)
             .SingleOrDefault(u =>
                 u.PrivateInfo.Email == username && u.PrivateInfo.Password == password);
-        if (user == null) throw new LoginException();
+        if (user == null) throw new LoginException("User or password wrong");
         
         return user;
     }
 
     public User LoginRestaurantUser(string username, string password)
     {
-        var user = LoginCostumerUser(username, password);
-        if (user.Restaurant == null) throw new LoginException();
+        var user = LoginCustomerUser(username, password);
+        if (user.Restaurant == null) throw new LoginException("User not connected to a restaurant");
 
         return user;
+    }
+
+    public User LoginAdmin(string username, string password)
+    {
+        var user = LoginCustomerUser(username, password);
+        if (!user.PrivateInfo.IsAdmin) throw new LoginException("This user does not have admin rights");
+        
+        return user;
+        
     }
 }
 

@@ -11,7 +11,7 @@ namespace TestSuite
         /*LoginManager tests below*/
         public LoginTests()
         {
-            using var ctx = new FoodRescue_DbContext();
+            using var ctx = new FoodRescue_DbContext("FoodRescue_ProjectDatabase_TEST");
             ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
             ctx.Seed();
@@ -19,7 +19,7 @@ namespace TestSuite
         [Fact]
         public void LoginCostumerUserTest()
         {
-            using var ctx = new FoodRescue_DbContext();
+            using var ctx = new FoodRescue_DbContext("FoodRescue_ProjectDatabase_TEST");
 
             var userRecord = ctx.Users
                 .Include(u => u.PrivateInfo)
@@ -27,8 +27,8 @@ namespace TestSuite
                     u.PrivateInfo.Email == "Kim.bjornsen@hotmail.com" 
                     && u.PrivateInfo.Password == "Password1");
 
-            var loginBackend = new LoginBackend();
-            var user = loginBackend.LoginCostumerUser("Kim.bjornsen@hotmail.com", "Password1");
+            var loginBackend = new LoginBackend("FoodRescue_ProjectDatabase_TEST");
+            var user = loginBackend.LoginCustomerUser("Kim.bjornsen@hotmail.com", "Password1");
 
             Assert.NotNull(userRecord);
             Assert.NotNull(user);
@@ -42,7 +42,7 @@ namespace TestSuite
         [Fact]
         public void LoginRestaurantUserTest()
         {
-            using var ctx = new FoodRescue_DbContext();
+            using var ctx = new FoodRescue_DbContext("FoodRescue_ProjectDatabase_TEST");
 
             var userRecord = ctx.Users
                 .Include(u => u.PrivateInfo)
@@ -51,7 +51,7 @@ namespace TestSuite
                     u.PrivateInfo.Email == "Server@Mcdonalds.com"
                     && u.PrivateInfo.Password == "Password1MCD");
 
-            var loginBackend = new LoginBackend();
+            var loginBackend = new LoginBackend("FoodRescue_ProjectDatabase_TEST");
             var user = loginBackend.LoginRestaurantUser("Server@Mcdonalds.com", "Password1MCD");
 
             Assert.NotNull(userRecord);
@@ -70,7 +70,7 @@ namespace TestSuite
 
         public void LoginRestaurantUserNotCorrectTest(string username, string password)
         {
-            var loginBackend = new LoginBackend();
+            var loginBackend = new LoginBackend("FoodRescue_ProjectDatabase_TEST");
 
             Assert.Throws<LoginException>(() => loginBackend.LoginRestaurantUser(username, password));
         }

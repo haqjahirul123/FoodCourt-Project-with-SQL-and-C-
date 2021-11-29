@@ -18,6 +18,7 @@ public class UserPrivateInfo
     [Required] [EmailAddress] [StringLength(50)] public string Email { get; set; }
 
     [Required] public string Password { get; set; }
+    [Required] public bool IsAdmin { get; set; }
 
     [ForeignKey("UserId")] public User User { get; set; }
 }
