@@ -2,8 +2,6 @@
 
 MainMenu();
 
-//BUG Om man går från DisplayAllRestaurants till AddRestaurantRecord så får man ReturnToMainMenuPrompt dubbelt. Gick inte att lösa genom att ta en bool in i metoderna och göra exitprompt på if sats
-
 void MainMenu()
 {
     CreateDatabase();
@@ -24,7 +22,7 @@ void MainMenu()
                                   "[0] Exit program");
 
 
-                string menuInput = Console.ReadLine();//TODO Gör om till en ReadKey. Fick dock inte if satsen att funka när den hade villkor som skulle godkänna numpad också... Får titta senare
+                string menuInput = Console.ReadLine(); //TODO Gör om till en ReadKey. Fick dock inte if satsen att funka när den hade villkor som skulle godkänna numpad också... Får titta senare
                 int menuChoice = -1;
 
                 try
@@ -40,18 +38,22 @@ void MainMenu()
                     {
                         case 1:
                             ResetDatabasePrompt();
+                            ReturnToMainMenuPrompt();
                             break;
 
                         case 2:
                             DisplayAllUsers();
+                            ReturnToMainMenuPrompt();
                             break;
 
                         case 3:
                             DisplayAllRestaurants();
+                            ReturnToMainMenuPrompt();
                             break;
 
                         case 4:
                             AddRestaurantRecord();
+                            ReturnToMainMenuPrompt();
                             break;
 
                         case 0:
@@ -102,7 +104,7 @@ void ResetDatabasePrompt()
             admin.CreateAndSeedDb();
 
             Console.WriteLine("Database has been reset!");
-            ReturnToMainMenuPrompt();
+            //ReturnToMainMenuPrompt();
             break;
         }
 
@@ -111,7 +113,7 @@ void ResetDatabasePrompt()
             Console.Clear();
 
             Console.WriteLine("No changes has been made to the database");
-            ReturnToMainMenuPrompt();
+            //ReturnToMainMenuPrompt();
             break;
         }
     }
@@ -131,7 +133,7 @@ void DisplayAllUsers()
         Console.WriteLine(user);
     }
 
-    ReturnToMainMenuPrompt();
+    //ReturnToMainMenuPrompt();
 }
 
 void DisplayAllRestaurants()
@@ -156,7 +158,7 @@ void DisplayAllRestaurants()
         AddRestaurantRecord();
     }
 
-    ReturnToMainMenuPrompt();
+    //ReturnToMainMenuPrompt();
 }
 
 void AddRestaurantRecord()
@@ -227,7 +229,7 @@ void AddRestaurantRecord()
         }
     }
 
-    ReturnToMainMenuPrompt();
+    //ReturnToMainMenuPrompt();
 }
 
 bool ExitProgramPrompt()
@@ -246,7 +248,7 @@ bool ExitProgramPrompt()
 
         if (!answer)
         {
-            ReturnToMainMenuPrompt();
+            //ReturnToMainMenuPrompt();
             return true;
         }
 
