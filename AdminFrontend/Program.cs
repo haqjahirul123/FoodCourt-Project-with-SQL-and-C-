@@ -6,11 +6,13 @@ void MainMenu()
 {
     CreateDatabase();
 
-    while (true)
+    bool runProgram = true;
+
+    while (runProgram)
     {
         try
         {
-            while (true)
+            while (runProgram)
             {
                 Console.WriteLine("Welcome admin. Please choose an option");
                 Console.WriteLine("[1] Reset database\n" +
@@ -51,7 +53,7 @@ void MainMenu()
                             break;
 
                         case 0:
-                            ExitPrompt();
+                            runProgram = ContinueProgramPrompt();
                             break;
                     }
                     Console.Clear();
@@ -82,21 +84,52 @@ void CreateDatabase()
     admin.CreateAndSeedDb();
 }
 
+bool YesNoPrompt(string outputPrompt, bool clearConsole)
+{
+    while (true)
+    {
+        Console.WriteLine($"{outputPrompt}\n[y/n]\t");
+
+        var keyInfo = Console.ReadKey();
+
+        if (keyInfo.Key == ConsoleKey.Y)
+        {
+            if (clearConsole)
+            {
+                Console.Clear();
+            }
+            return true;
+        }
+
+        if (keyInfo.Key == ConsoleKey.N)
+        {
+            if (clearConsole)
+            {
+                Console.Clear();
+            }
+            return false;
+        }
+
+        if (clearConsole)
+        {
+            Console.Clear();
+        }
+    }
+}
+
 void ResetDatabasePrompt()
 {
     var admin = new AdminBackend();
     while (true)
     {
         Console.Clear();
-        Console.Write("All changes and additions will be deleted and the database will be reset to its default state\n" +
-                      "Are you sure you want to reset the database?\n" +
-                      "[y/n]\t");
+        string prompt = "All changes and additions will be deleted and the database will be reset to its default state\n" +
+                        "Are you sure you want to reset the database?";
 
-        var keyInfo = Console.ReadKey();
-        if (keyInfo.Key == ConsoleKey.Y)
+        bool answer = YesNoPrompt(prompt, true);
+
+        if (answer)
         {
-            Console.Clear();
-
             admin.CreateAndSeedDb();
 
             Console.WriteLine("Database has been reset!\n" +
@@ -105,7 +138,8 @@ void ResetDatabasePrompt()
             Console.ReadLine();
             break;
         }
-        if (keyInfo.Key == ConsoleKey.N)
+
+        if (!answer)
         {
             Console.Clear();
 
@@ -117,23 +151,29 @@ void ResetDatabasePrompt()
     }
 }
 
-void ExitPrompt()
+bool ContinueProgramPrompt()
 {
     while (true)
     {
         Console.Clear();
-        Console.Write("Are you sure you want to exit the program?\n" +
-                      "[y/n]\t");
-        var keyInfo = Console.ReadKey();
-        if (keyInfo.Key == ConsoleKey.Y)
+
+        string prompt = "Are you sure you want to exit the program?";
+        bool answer = YesNoPrompt(prompt, true);
+
+        if (answer)
         {
-            Console.Clear();
-            return;
+            return false;
         }
-        if (keyInfo.Key == ConsoleKey.N)
+
+        if (!answer)
         {
-            break;
+            Console.WriteLine("Please press enter to return to the menu");
+
+            Console.ReadLine();
+            return true;
         }
+
+        Console.Clear();
     }
 }
 
