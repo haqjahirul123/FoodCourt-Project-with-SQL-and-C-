@@ -11,10 +11,10 @@ namespace LoginClient
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-
-            AdminBackend adminBackend = new AdminBackend("FoodRescue_ProjectDatabase_REAL");
+            string databaseName = "FoodRescue_ProjectDatabase_REAL";
+            AdminBackend adminBackend = new(databaseName);
             adminBackend.CreateDb();
-            Application.Run(new LoginClientForm("FoodRescue_ProjectDatabase_REAL"));
+            Application.Run(new LoginClientForm(databaseName));
         }
     }
 }
