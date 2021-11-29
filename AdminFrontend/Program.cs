@@ -22,12 +22,13 @@ void MainMenu()
                                   "[0] Exit program");
 
 
-                string menuInput = Console.ReadLine(); //TODO Gör om till en ReadKey. Fick dock inte if satsen att funka när den hade villkor som skulle godkänna numpad också... Får titta senare
+                var menuInput = Console.ReadKey();
                 int menuChoice = -1;
+
 
                 try
                 {
-                    menuChoice = Convert.ToInt32(menuInput);
+                    menuChoice = int.Parse(menuInput.KeyChar.ToString());
 
                     if (menuChoice < 0 || menuChoice > 4)
                     {
@@ -104,7 +105,6 @@ void ResetDatabasePrompt()
             admin.CreateAndSeedDb();
 
             Console.WriteLine("Database has been reset!");
-            //ReturnToMainMenuPrompt();
             break;
         }
 
@@ -113,7 +113,6 @@ void ResetDatabasePrompt()
             Console.Clear();
 
             Console.WriteLine("No changes has been made to the database");
-            //ReturnToMainMenuPrompt();
             break;
         }
     }
@@ -132,8 +131,6 @@ void DisplayAllUsers()
     {
         Console.WriteLine(user);
     }
-
-    //ReturnToMainMenuPrompt();
 }
 
 void DisplayAllRestaurants()
@@ -157,8 +154,6 @@ void DisplayAllRestaurants()
     {
         AddRestaurantRecord();
     }
-
-    //ReturnToMainMenuPrompt();
 }
 
 void AddRestaurantRecord()
@@ -172,6 +167,8 @@ void AddRestaurantRecord()
         while (runLoop)
         {
             Console.Clear();
+
+
 
             Console.WriteLine("Please enter the name of the restaurant:");
             name = Console.ReadLine();
@@ -228,8 +225,6 @@ void AddRestaurantRecord()
             runLoop = !YesNoPrompt(prompt, true);
         }
     }
-
-    //ReturnToMainMenuPrompt();
 }
 
 bool ExitProgramPrompt()
@@ -248,7 +243,6 @@ bool ExitProgramPrompt()
 
         if (!answer)
         {
-            //ReturnToMainMenuPrompt();
             return true;
         }
 
@@ -292,7 +286,6 @@ bool YesNoPrompt(string outputPrompt, bool clearConsole)
 void ReturnToMainMenuPrompt()
 {
     Console.WriteLine("\nPlease press enter to return to the menu");
-    
     
     Console.ReadLine();
 }
