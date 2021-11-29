@@ -4,75 +4,75 @@ using DataLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace TestSuite
+namespace TestSuite;
+
+public class LoginTests
 {
-    public class LoginTests
+    /*LoginManager tests below*/
+    private const string DatabaseName = "FoodRescue_ProjectDatabase_TEST";
+    public LoginTests()
     {
-        /*LoginManager tests below*/
-        public LoginTests()
-        {
-            using var ctx = new FoodRescue_DbContext("FoodRescue_ProjectDatabase_TEST");
-            ctx.Database.EnsureDeleted();
-            ctx.Database.EnsureCreated();
-            ctx.Seed();
-        }
-        [Fact]
-        public void LoginCostumerUserTest()
-        {
-            using var ctx = new FoodRescue_DbContext("FoodRescue_ProjectDatabase_TEST");
+        using var ctx = new FoodRescue_DbContext(DatabaseName);
+        ctx.Database.EnsureDeleted();
+        ctx.Database.EnsureCreated();
+        ctx.Seed();
+    }
 
-            var userRecord = ctx.Users
-                .Include(u => u.PrivateInfo)
-                .Single(u =>
-                    u.PrivateInfo.Email == "Kim.bjornsen@hotmail.com" 
-                    && u.PrivateInfo.Password == "Password1");
+    [Fact]
+    public void LoginCostumerUserTest()
+    {
+        using var ctx = new FoodRescue_DbContext(DatabaseName);
 
-            var loginBackend = new LoginBackend("FoodRescue_ProjectDatabase_TEST");
-            var user = loginBackend.LoginCustomerUser("Kim.bjornsen@hotmail.com", "Password1");
+        var userRecord = ctx.Users
+            .Include(u => u.PrivateInfo)
+            .Single(u =>
+                u.PrivateInfo.Email == "Kim.bjornsen@hotmail.com" 
+                && u.PrivateInfo.Password == "Password1");
 
-            Assert.NotNull(userRecord);
-            Assert.NotNull(user);
-            Assert.Null(user.Restaurant);
-            Assert.Equal(userRecord.PrivateInfo.Email, user.PrivateInfo.Email);
-            Assert.Equal(userRecord.PrivateInfo.Password, user.PrivateInfo.Password);
-            Assert.Equal(userRecord.PrivateInfo.FullName, user.PrivateInfo.FullName);
-            Assert.Equal(userRecord.PrivateInfo.UserId, user.PrivateInfo.UserId);
-        }
+        var loginBackend = new LoginBackend(DatabaseName);
+        var user = loginBackend.LoginCustomerUser("Kim.bjornsen@hotmail.com", "Password1");
 
-        [Fact]
-        public void LoginRestaurantUserTest()
-        {
-            using var ctx = new FoodRescue_DbContext("FoodRescue_ProjectDatabase_TEST");
+        Assert.NotNull(userRecord);
+        Assert.NotNull(user);
+        Assert.Null(user.Restaurant);
+        Assert.Equal(userRecord.PrivateInfo.Email, user.PrivateInfo.Email);
+        Assert.Equal(userRecord.PrivateInfo.Password, user.PrivateInfo.Password);
+        Assert.Equal(userRecord.PrivateInfo.FullName, user.PrivateInfo.FullName);
+        Assert.Equal(userRecord.PrivateInfo.UserId, user.PrivateInfo.UserId);
+    }
 
-            var userRecord = ctx.Users
-                .Include(u => u.PrivateInfo)
-                .Include(u => u.Restaurant)
-                .Single(u =>
-                    u.PrivateInfo.Email == "Server@Mcdonalds.com"
-                    && u.PrivateInfo.Password == "Password1MCD");
+    [Fact]
+    public void LoginRestaurantUserTest()
+    {
+        using var ctx = new FoodRescue_DbContext(DatabaseName);
 
-            var loginBackend = new LoginBackend("FoodRescue_ProjectDatabase_TEST");
-            var user = loginBackend.LoginRestaurantUser("Server@Mcdonalds.com", "Password1MCD");
+        var userRecord = ctx.Users
+            .Include(u => u.PrivateInfo)
+            .Include(u => u.Restaurant)
+            .Single(u =>
+                u.PrivateInfo.Email == "Server@Mcdonalds.com"
+                && u.PrivateInfo.Password == "Password1MCD");
 
-            Assert.NotNull(userRecord);
-            Assert.NotNull(user);
-            Assert.Equal(userRecord.PrivateInfo.Email, user.PrivateInfo.Email);
-            Assert.Equal(userRecord.PrivateInfo.Password, user.PrivateInfo.Password);
-            Assert.Equal(userRecord.Restaurant.RestaurantId, user.Restaurant.RestaurantId);
-            Assert.Equal(userRecord.PrivateInfo.UserId, user.PrivateInfo.UserId);
-        }
+        var loginBackend = new LoginBackend(DatabaseName);
+        var user = loginBackend.LoginRestaurantUser("Server@Mcdonalds.com", "Password1MCD");
 
-        [Theory]
-        [InlineData("NotExisting@yahoo.se", "Password1M")]
-        [InlineData("Kim.bjornsen@hotmail.com", "Password1")]
-        [InlineData("Server@Mcdonalds.com", "Password1")]
+        Assert.NotNull(userRecord);
+        Assert.NotNull(user);
+        Assert.Equal(userRecord.PrivateInfo.Email, user.PrivateInfo.Email);
+        Assert.Equal(userRecord.PrivateInfo.Password, user.PrivateInfo.Password);
+        Assert.Equal(userRecord.Restaurant.RestaurantId, user.Restaurant.RestaurantId);
+        Assert.Equal(userRecord.PrivateInfo.UserId, user.PrivateInfo.UserId);
+    }
 
+    [Theory]
+    [InlineData("NotExisting@yahoo.se", "Password1M")]
+    [InlineData("Kim.bjornsen@hotmail.com", "Password1")]
+    [InlineData("Server@Mcdonalds.com", "Password1")]
 
-        public void LoginRestaurantUserNotCorrectTest(string username, string password)
-        {
-            var loginBackend = new LoginBackend("FoodRescue_ProjectDatabase_TEST");
+    public void LoginRestaurantUserNotCorrectTest(string username, string password)
+    {
+        var loginBackend = new LoginBackend(DatabaseName);
 
-            Assert.Throws<LoginException>(() => loginBackend.LoginRestaurantUser(username, password));
-        }
+        Assert.Throws<LoginException>(() => loginBackend.LoginRestaurantUser(username, password));
     }
 }

@@ -22,7 +22,7 @@ public class LoginBackend
             .Include(u => u.PrivateInfo)
             .Include(u => u.Restaurant)
             .SingleOrDefault(u =>
-                u.PrivateInfo.Email == username && u.PrivateInfo.Password == password);
+                u.PrivateInfo.Email.ToLower() == username.ToLower() && u.PrivateInfo.Password == password);
         if (user == null) throw new LoginException("User or password wrong");
         
         return user;
@@ -42,7 +42,6 @@ public class LoginBackend
         if (!user.PrivateInfo.IsAdmin) throw new LoginException("This user does not have admin rights");
         
         return user;
-        
     }
 }
 
