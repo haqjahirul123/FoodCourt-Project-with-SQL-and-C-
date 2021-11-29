@@ -16,6 +16,8 @@ public class LoginBackend
     }
     public User LoginCustomerUser(string username, string password)
     {
+        if (username == null || password == null) throw new LoginException();
+
         using var ctx = new FoodRescue_DbContext(_databaseName);
 
         var user = ctx.Users
@@ -23,7 +25,7 @@ public class LoginBackend
             .Include(u => u.Restaurant)
             .SingleOrDefault(u =>
                 u.PrivateInfo.Email.ToLower() == username.ToLower() && u.PrivateInfo.Password == password);
-        if (user == null) throw new LoginException("User or password wrong");
+        if (user == null) throw new LoginException("Username or password wrong");
         
         return user;
     }
