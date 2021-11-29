@@ -2,6 +2,8 @@
 
 MainMenu();
 
+//BUG Om man går från DisplayAllRestaurants till AddRestaurantRecord så får man ReturnToMainMenuPrompt dubbelt. Gick inte att lösa genom att ta en bool in i metoderna och göra exitprompt på if sats
+
 void MainMenu()
 {
     CreateDatabase();
@@ -22,7 +24,7 @@ void MainMenu()
                                   "[0] Exit program");
 
 
-                string menuInput = Console.ReadLine();//Gör om till en ReadKey? Fick dock inte if satsen att funka när den hade villkor som skulle godkänna numpad också... Får titta senare
+                string menuInput = Console.ReadLine();//TODO Gör om till en ReadKey. Fick dock inte if satsen att funka när den hade villkor som skulle godkänna numpad också... Får titta senare
                 int menuChoice = -1;
 
                 try
@@ -53,7 +55,7 @@ void MainMenu()
                             break;
 
                         case 0:
-                            runProgram = ContinueProgramPrompt();
+                            runProgram = ExitProgramPrompt();
                             break;
                     }
                     Console.Clear();
@@ -146,15 +148,89 @@ void DisplayAllRestaurants()
         Console.WriteLine(restaurant);
     }
 
+    string prompt = "\nDo you want to add a restaurant?";
+    bool answer = YesNoPrompt(prompt, false);
+
+    if (answer)
+    {
+        AddRestaurantRecord();
+    }
+
     ReturnToMainMenuPrompt();
 }
 
 void AddRestaurantRecord()
 {
-    //TODO Add restaurant record
+    string name = "";
+    string phoneNumber = "";
+    bool runLoop = true;
+
+    while (runLoop)
+    {
+        while (runLoop)
+        {
+            Console.Clear();
+
+            Console.WriteLine("Please enter the name of the restaurant:");
+            name = Console.ReadLine();
+
+            if (name.Length < 3 || name.Length > 30)
+            {
+                Console.WriteLine("\nRestaurant name has to be between 3 and 30 characters\n" +
+                                  "If restaurant name is shorter than 3 characters, get rekt\n" + //jk
+                                  "Press enter to try again");
+                Console.ReadKey();
+            }
+            else
+            {
+                runLoop = false;
+            }
+        }
+
+        runLoop = true;
+        while (runLoop)
+        {
+            Console.Clear();
+            Console.WriteLine("Please enter the phonenumber of the restaurant:");
+            phoneNumber = Console.ReadLine();
+            if (phoneNumber.Length < 3 || phoneNumber.Length > 30)
+            {
+                Console.WriteLine("\nRestaurant phonenumber has to be between 3 and 30 characters\n" +
+                                  "Press enter to try again");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            else
+            {
+                runLoop = false;
+            }
+        }
+
+        Console.Clear();
+
+        string prompt = $"Do you want to add the restaurant {name} with the phonenumber {phoneNumber} to the database?";
+        bool answer = YesNoPrompt(prompt, true);
+
+        if (answer)
+        {
+            var admin = new AdminBackend();
+            admin.AddRestaurant(name, phoneNumber);
+            Console.WriteLine($"{name} has been added to the database");
+
+            DisplayAllRestaurants();
+        }
+        else
+        {
+            prompt = $"{name} was not added\n\n" +
+                     $"Do you want to start over? Selecting no will return you to the main menu";
+            runLoop = !YesNoPrompt(prompt, true);
+        }
+    }
+
+    ReturnToMainMenuPrompt();
 }
 
-bool ContinueProgramPrompt()
+bool ExitProgramPrompt()
 {
     while (true)
     {
@@ -182,7 +258,7 @@ bool YesNoPrompt(string outputPrompt, bool clearConsole)
 {
     while (true)
     {
-        Console.WriteLine($"{outputPrompt}\n[y/n]\t");
+        Console.Write($"{outputPrompt}\n[y/n]\t");
 
         var keyInfo = Console.ReadKey();
 
@@ -214,5 +290,7 @@ bool YesNoPrompt(string outputPrompt, bool clearConsole)
 void ReturnToMainMenuPrompt()
 {
     Console.WriteLine("\nPlease press enter to return to the menu");
+    
+    
     Console.ReadLine();
 }
