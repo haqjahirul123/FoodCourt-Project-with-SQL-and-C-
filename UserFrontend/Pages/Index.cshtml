@@ -2,6 +2,10 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    string[] tableHeaders = new string[]
+            {"UserId","FirstName","LastName","Email"
+
+            };
 }
 <style>
 table, th, td {
@@ -15,19 +19,22 @@ table, th, td {
 
    <table style="">
   <tr>
-    <th>User ID</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Email</th>
+            @{
+                foreach(var tableHeader in tableHeaders)
+                {
+                    <th>@tableHeader</th>
+                }
+            }
+   
   </tr>
   <tr>
-    <td>Alfreds Futterkiste</td>
+    <td>1</td>
     <td>Maria </td>
     <td>Anders</td>
      <td>Maria@gmail.com</td>
   </tr>
   <tr>
-    <td>Centro comercial Moctezuma</td>
+    <td>2</td>
     <td>Francisco </td>
     <td>Chang</td>
      <td>Chang@gmail.com</td>
