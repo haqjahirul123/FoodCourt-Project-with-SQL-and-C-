@@ -14,18 +14,17 @@ void MainMenu()
         {
             while (runProgram)
             {
-                Console.WriteLine("Welcome admin. Please choose an option");
-                Console.WriteLine("[1] Reset database\n" +
-                                  "[2] Display all user records\n" +
-                                  "[3] Display all restaurant records\n" +
-                                  "[4] Add restaurant record\n" +
-                                  "[0] Exit program");
-
-
+                Console.WriteLine("\n\tWelcome admin.\n\t\t" +
+                                  "Please choose an option");
+                Console.Write("\t\t[1] Reset database\n\t\t" +
+                                  "[2] Display all user records\n\t\t" +
+                                  "[3] Display all restaurant records\n\t\t" +
+                                  "[4] Add restaurant record\n\t\t" +
+                                  "[0] Exit program\n\t\t");
+                
                 var menuInput = Console.ReadKey();
                 int menuChoice = -1;
-
-
+                
                 try
                 {
                     menuChoice = int.Parse(menuInput.KeyChar.ToString());
@@ -65,7 +64,7 @@ void MainMenu()
                 }
                 catch
                 {
-                    Console.WriteLine("Invalid input, please try again");
+                    Console.Write("\tInvalid input, please try again");
 
                     Console.ReadLine();
                     Console.Clear();
@@ -74,8 +73,8 @@ void MainMenu()
         }
         catch
         {
-            Console.WriteLine("An unexpected error has accoured\n" +
-                              "Please press enter to restart");
+            Console.Write("\tAn unexpected error has accoured\n" +
+                              "\tPlease press enter to restart");
 
             Console.ReadLine();
             Console.Clear();
@@ -95,8 +94,8 @@ void ResetDatabasePrompt()
     while (true)
     {
         Console.Clear();
-        string prompt = "All changes and additions will be deleted and the database will be reset to its default state\n" +
-                        "Are you sure you want to reset the database?";
+        string prompt = "\n\tAll changes and additions will be deleted and the database will be reset to its default state\n" +
+                        "\n\tAre you sure you want to reset the database?";
 
         bool answer = YesNoPrompt(prompt, true);
 
@@ -104,7 +103,7 @@ void ResetDatabasePrompt()
         {
             admin.CreateAndSeedDb();
 
-            Console.WriteLine("Database has been reset!");
+            Console.WriteLine("\n\tDatabase has been reset!");
             break;
         }
 
@@ -112,7 +111,7 @@ void ResetDatabasePrompt()
         {
             Console.Clear();
 
-            Console.WriteLine("No changes has been made to the database");
+            Console.WriteLine("\n\tNo changes has been made to the database");
             break;
         }
     }
@@ -124,12 +123,12 @@ void DisplayAllUsers()
 
     Console.Clear();
 
-    Console.WriteLine("Users on record:\n");
+    Console.WriteLine("\n\tUsers on record:\n");
 
     var users = admin.GetUsers();
     foreach (var user in users)
     {
-        Console.WriteLine(user);
+        Console.WriteLine("\t\t" + user);
     }
 }
 
@@ -139,15 +138,15 @@ void DisplayAllRestaurants()
 
     Console.Clear();
 
-    Console.WriteLine("Restaurants on record:\n");
+    Console.WriteLine("\n\tRestaurants on record:\n");
 
     var restaurants = admin.GetRestaurants();
     foreach (var restaurant in restaurants)
     {
-        Console.WriteLine(restaurant);
+        Console.WriteLine("\t\t" + restaurant);
     }
 
-    string prompt = "\nDo you want to add a restaurant?";
+    string prompt = "\n\tDo you want to add a restaurant?";
     bool answer = YesNoPrompt(prompt, false);
 
     if (answer)
@@ -167,17 +166,15 @@ void AddRestaurantRecord()
         while (runLoop)
         {
             Console.Clear();
-
-
-
-            Console.WriteLine("Please enter the name of the restaurant:");
+            
+            Console.Write("\n\tPlease enter the name of the restaurant:\n\n\t\t");
             name = Console.ReadLine();
 
             if (name.Length < 3 || name.Length > 30)
             {
-                Console.WriteLine("\nRestaurant name has to be between 3 and 30 characters\n" +
-                                  "If restaurant name is shorter than 3 characters, get rekt\n" + //jk
-                                  "Press enter to try again");
+                Console.WriteLine("\n\tRestaurant name has to be between 3 and 30 characters\n" +
+                                  "\tIf restaurant name is shorter than 3 characters, get rekt\n" + //jk
+                                  "\tPress enter to try again");
                 Console.ReadKey();
             }
             else
@@ -190,12 +187,12 @@ void AddRestaurantRecord()
         while (runLoop)
         {
             Console.Clear();
-            Console.WriteLine("Please enter the phonenumber of the restaurant:");
+            Console.Write("\n\tPlease enter the phonenumber of the restaurant:\n\n\t\t");
             phoneNumber = Console.ReadLine();
             if (phoneNumber.Length < 3 || phoneNumber.Length > 30)
             {
-                Console.WriteLine("\nRestaurant phonenumber has to be between 3 and 30 characters\n" +
-                                  "Press enter to try again");
+                Console.WriteLine("\n\tRestaurant phonenumber has to be between 3 and 30 characters\n" +
+                                  "\tPress enter to try again");
                 Console.ReadKey();
                 Console.Clear();
             }
@@ -207,22 +204,22 @@ void AddRestaurantRecord()
 
         Console.Clear();
 
-        string prompt = $"Do you want to add the restaurant {name} with the phonenumber {phoneNumber} to the database?";
+        string prompt = $"\n\tDo you want to add the restaurant {name} with the phonenumber {phoneNumber} to the database?";
         bool answer = YesNoPrompt(prompt, true);
 
         if (answer)
         {
             var admin = new AdminBackend();
             admin.AddRestaurant(name, phoneNumber);
-            Console.WriteLine($"{name} has been added to the database");
+            Console.WriteLine($"\n\t{name} has been added to the database");
 
             DisplayAllRestaurants();
         }
         else
         {
-            prompt = $"{name} was not added\n\n" +
-                     $"Do you want to start over? Selecting no will return you to the main menu";
-            runLoop = !YesNoPrompt(prompt, true);
+            prompt = $"\n\t{name} was not added\n" +
+                     $"\n\tDo you want to start over? Selecting no will return you to the main menu";
+            runLoop = YesNoPrompt(prompt, true);
         }
     }
 }
@@ -254,7 +251,7 @@ bool YesNoPrompt(string outputPrompt, bool clearConsole)
 {
     while (true)
     {
-        Console.Write($"{outputPrompt}\n[y/n]\t");
+        Console.Write($"\t{outputPrompt}\n\n\t[y/n]\t");
 
         var keyInfo = Console.ReadKey();
 
@@ -285,7 +282,7 @@ bool YesNoPrompt(string outputPrompt, bool clearConsole)
 
 void ReturnToMainMenuPrompt()
 {
-    Console.WriteLine("\nPlease press enter to return to the menu");
+    Console.Write("\n\tPlease press enter to return to the menu");
     
     Console.ReadLine();
 }
