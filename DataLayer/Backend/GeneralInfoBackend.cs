@@ -7,9 +7,9 @@ namespace DataLayer.Backend;
 
 public class GeneralInfoBackend
 {
-    public static async Task<FoodBox> GetFoodBox(int? id)
+    public static async Task<FoodBox> GetFoodBox(int? id, string databaseName)
     {
-        await using var ctx = new FoodRescue_DbContext();
+        await using var ctx = new FoodRescue_DbContext(databaseName);
         var foodBox = await ctx.FoodBoxes
             .Include(f => f.Restaurant)
             .Include(f=> f.Purchase)

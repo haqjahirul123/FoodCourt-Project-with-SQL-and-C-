@@ -9,24 +9,16 @@ public class UserPrivateInfo
     [Display(Name = "User id")]
     public int UserId { get; set; }
 
-    [Required]
-    [StringLength(20, MinimumLength = 2)]
-    [Display(Name = "First Name")]
-    public string FirstName { get; set; }
+    [Required] [StringLength(20, MinimumLength = 2)] [Display(Name = "First Name")] public string FirstName { get; set; }
 
-    [Required]
-    [StringLength(20, MinimumLength = 2)]
-    [Display(Name = "Last Name")]
-    public string LastName { get; set; }
+    [Required] [StringLength(20, MinimumLength = 2)] [Display(Name = "Last Name")] public string LastName { get; set; }
+    
+    [Display(Name = "Full Name")] public string FullName => LastName + ", " + FirstName;
 
-    [Display(Name = "Full Name")]
-    public string FullName => LastName + ", " + FirstName;
+    [Required] [EmailAddress] [StringLength(50)] public string Email { get; set; }
 
-    [Required]
-    [EmailAddress]
-    [StringLength(50)]
-    public string Email { get; set; }
+    [Required] public string Password { get; set; }
+    [Required] public bool IsAdmin { get; set; }
 
-    [ForeignKey("UserId")]
-    public User User { get; set; }
+    [ForeignKey("UserId")] public User User { get; set; }
 }
