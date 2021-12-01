@@ -1,13 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.IO.Compression;
 using DataLayer.Model;
 
 
 namespace DataLayer.Data;
-//TODO Ändra till internal när du har fixat i webappen
+
 public class FoodRescue_DbContext : DbContext
 {
+    private readonly string _databaseName;
+    public FoodRescue_DbContext(string databaseName)
+    {
+        _databaseName = databaseName;
+    }
     public DbSet<FoodBox> FoodBoxes { get; set; }
     public DbSet<Restaurant> Restaurants { get; set; }
     public DbSet<User> Users { get; set; }
@@ -19,7 +23,7 @@ public class FoodRescue_DbContext : DbContext
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder
-                .UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=FoodRescue_ProjektArbete");
+                .UseSqlServer(@$"Server=(localdb)\MSSQLLocalDB;Database={_databaseName}");
         }
     }
 
@@ -38,20 +42,25 @@ public class FoodRescue_DbContext : DbContext
     {
         var userPrivateInfos = new UserPrivateInfo[]
         {
-            new() { Email = "Kim.bjornsen@hotmail.com", FirstName = "Kim", LastName = "Björnsen Åklint" },
-            new() { Email = "Pia@hotmail.com", FirstName = "Pia", LastName = "Hagman" },
-            new() {  Email = "Johan@hotmail.com", FirstName = "Johan", LastName = "Fahlgren" }
+            new() { Email = "Kim.bjornsen@hotmail.com", FirstName = "Kim", LastName = "Björnsen Åklint", Password = "Password1", IsAdmin = false },
+            new() { Email = "Pia@hotmail.com", FirstName = "Pia", LastName = "Hagman", Password = "Password1", IsAdmin = false },
+            new() { Email = "Johan@hotmail.com", FirstName = "Johan", LastName = "Fahlgren", Password = "Password1", IsAdmin = false },
+            new() { Email = "Server@Mcdonalds.com", FirstName = "Server1", LastName = "", Password = "Password1MCD", IsAdmin = false },
+            new() { Email = "admin@foodrescue.com", FirstName = "admin", LastName = "", Password = "Adminpassword1", IsAdmin = true }
+
         };
         var users = new User[]
         {
             new() {PrivateInfo = userPrivateInfos[0]},
             new() {PrivateInfo = userPrivateInfos[1]},
-            new() {PrivateInfo = userPrivateInfos[2]}
+            new() {PrivateInfo = userPrivateInfos[2]},
+            new() {PrivateInfo = userPrivateInfos[3]},
+            new() {PrivateInfo = userPrivateInfos[4]}
         };
-
+        Users.AddRange(users);
         var restaurants = new Restaurant[]
         {
-            new() { RestaurantName = "Mcdonalds", PhoneNumber = "0700 - 82 32 11" },
+            new() { RestaurantName = "Mcdonalds", PhoneNumber = "0700 - 82 32 11", Users = new[] {users[3]}},
             new() { RestaurantName = "Burger King", PhoneNumber = "0700 - 82 32 12" },
             new() { RestaurantName = "Max Burgers", PhoneNumber = "0700 - 82 32 13" }
         };
@@ -82,6 +91,16 @@ public class FoodRescue_DbContext : DbContext
         };
 
         FoodBoxes.AddRange(foodBoxes);
+        SaveChanges();
+    }
+
+    public void SeedRealDb()
+    {
+        var privateInfo = new UserPrivateInfo() {Email = "Server@Mcdonalds.com", FirstName = "Server1", LastName = "", Password = "Password1MCD"};
+        var restaurant = new Restaurant {RestaurantName = "Mcdonalds", PhoneNumber = "0700 - 82 32 11"};
+        var user = new User {PrivateInfo = privateInfo, Restaurant = restaurant};
+
+        Users.Add(user);
         SaveChanges();
     }
     #endregion
