@@ -84,13 +84,16 @@ void MainMenu()
 
 void CreateDatabase()
 {
-    var admin = new AdminBackend();
+    string databaseName = "FoodRescue_ProjectDatabase_REAL";
+    var admin = new AdminBackend(databaseName);
     admin.CreateAndSeedDb();
 }
 
 void ResetDatabasePrompt()
 {
-    var admin = new AdminBackend();
+    string databaseName = "FoodRescue_ProjectDatabase_REAL";
+    var admin = new AdminBackend(databaseName);
+
     while (true)
     {
         Console.Clear();
@@ -119,7 +122,8 @@ void ResetDatabasePrompt()
 
 void DisplayAllUsers()
 {
-    var admin = new AdminBackend();
+    string databaseName = "FoodRescue_ProjectDatabase_REAL";
+    var admin = new AdminBackend(databaseName);
 
     Console.Clear();
 
@@ -134,7 +138,8 @@ void DisplayAllUsers()
 
 void DisplayAllRestaurants()
 {
-    var admin = new AdminBackend();
+    string databaseName = "FoodRescue_ProjectDatabase_REAL";
+    var admin = new AdminBackend(databaseName);
 
     Console.Clear();
 
@@ -209,7 +214,9 @@ void AddRestaurantRecord()
 
         if (answer)
         {
-            var admin = new AdminBackend();
+            string databaseName = "FoodRescue_ProjectDatabase_REAL";
+            var admin = new AdminBackend(databaseName);
+
             admin.AddRestaurant(name, phoneNumber);
             Console.WriteLine($"\n\t{name} has been added to the database");
 
