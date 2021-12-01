@@ -60,8 +60,8 @@ public partial class LoginClientForm : Form
             string username = AdminEmailTextBox.Text;
             string password = AdminPasswordTextBox.Text;
             _loginBackend.LoginAdmin(username, password);
-            Process.Start(@"..\..\..\..\TestAppen\bin\Debug\net6.0\TestAppen.exe", _databaseName);
-            Close();
+            //Process.Start(@"..\..\..\..\TestAppen\bin\Debug\net6.0\TestAppen.exe", _databaseName);
+            //Close();
             //Close();
             //TestAppen.Program.Main(new string[]{_databaseName});
             //TODO Starta admin client.
