@@ -2,10 +2,14 @@ using DataLayer.Backend;
 using DataLayer.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var admin = new AdminBackend();
+//var admin = new AdminBackend( );
+
+string databaseName = "FoodRescue_ProjectDatabase_REAL";
+var admin = new AdminBackend(databaseName);    //fix connection
 admin.CreateAndSeedDb();
-using var ctx = new FoodRescue_DbContext();
-Console.WriteLine(ctx);
+
+//using var ctx = new FoodRescue_DbContext();
+//Console.WriteLine(ctx);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
