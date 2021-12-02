@@ -8,11 +8,9 @@ void MainMenu()
 {
     CreateDatabase();
 
-    bool runTheProgram = true;
-
     #region Hela ConsoleAppen
 
-    
+    bool runTheProgram = true;
 
     while (runTheProgram)
     {
@@ -37,17 +35,17 @@ void MainMenu()
             switch (menuChoice)
             {
                 case 1:
-                    //FindAllSoldFoodPackagesForYourRestaurant();
+                    FindAllSoldFoodPackagesForYourRestaurant();
                     ReturnToMainMenuPrompt();
                     break;
 
                 case 2:
-                   //FindAllUnSoldFoodPackagesForYourRestaurant();
+                   FindAllUnSoldFoodPackagesForYourRestaurant();
                     ReturnToMainMenuPrompt();
                     break;
 
                 case 3:
-                    //AddNewFoodBox();
+                    AddNewFoodBox();
                     ReturnToMainMenuPrompt();
                     break;
 
@@ -69,6 +67,7 @@ void MainMenu()
 
     }
 }
+#endregion
 
 #region Creating database
 
@@ -92,8 +91,10 @@ void FindAllSoldFoodPackagesForYourRestaurant()
 
     var soldpackages = restaurant.GetSoldFoodBoxes();
 
+    Console.WriteLine("\t \t \t \t \n \n *All sold foodpackages for Mcdonalds* : \n");
     foreach (var s in soldpackages)
     {
+
         Console.WriteLine($"ID: {s.FoodboxId}, \n" +
                           $" Meal: {s.FoodName}, \n " +
                           $"Catogory: {s.TypeOfFood}, \n" +
@@ -106,6 +107,33 @@ Console.Clear();
 
 #endregion
 
+#region See all unsold foodpackages for your restaurant
+
+void FindAllUnSoldFoodPackagesForYourRestaurant()
+{
+    string restaurantId = "FoodRescue_ProjectDatabase_REAL";
+    string databaseName = "FoodRescue_ProjectDatabase_REAL";
+    var restaurant = new RestaurantBackend(1, databaseName);
+   
+
+    restaurant.GetLoggedInRestaurantInfo();
+
+    var unsoldFoodboxes = restaurant.GetUnsoldFoodBoxes();
+    Console.WriteLine("\t \t \t \t \n \n *All unsold foodpackages for Mcdonalds* : \n  ");
+
+    foreach (var f in unsoldFoodboxes)
+    {
+        Console.WriteLine($"ID: {f.FoodboxId}, \n" +
+                          $" Meal: {f.FoodName}, \n " +
+                          $"Catogory: {f.TypeOfFood}, \n" +
+                          $" Cost: {f.Price}, \n " +
+                          $"{f.Restaurant} \n ");
+    }
+
+}
+
+
+#endregion
 
 #region AddNewFoodBox
 
@@ -198,22 +226,6 @@ void AddNewFoodBox()
 #endregion
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #region Option 0 (leaving the program)
 bool ExitProgramPrompt()
 {
@@ -281,4 +293,3 @@ void ReturnToMainMenuPrompt()
 
 
 
-#endregion
