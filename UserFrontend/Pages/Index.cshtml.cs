@@ -9,6 +9,7 @@ namespace UserFrontend.Pages
     public class IndexModel : PageModel
     {
         public List<Users> usersLists = new List<Users>();
+        public string firstName;
         //public string firstName;
         //public string lastName;
         //public string email;
@@ -18,7 +19,8 @@ namespace UserFrontend.Pages
         public void OnGet()
         {
              Users users = new Users();
-            usersLists=users.GetUsersInfo();
+            usersLists=users.GetUsersInfo(usersLists);
+          
             //string connectionString = "Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog= FoodRescue_inlamning_2 ; Integrated Security=True";
             //SqlConnection con = new SqlConnection(connectionString);
             //con.Open();
@@ -40,7 +42,14 @@ namespace UserFrontend.Pages
         //    UserBackend user = new UserBackend(1,"vdhddd");
         //    user.GetUserInfo();
         //    Console.WriteLine(user);
-           
+
         //}
+
+        public void OnPost()
+        {
+            //List<Users> firstName = Request.Form["Name"];
+            //Users users = new Users();
+            //users.GetUsersInfo(firstName);
+        }
     }
 }

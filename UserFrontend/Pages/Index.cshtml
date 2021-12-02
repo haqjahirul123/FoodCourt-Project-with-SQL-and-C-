@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Home page";
     string[] tableHeaders = new string[]
-            {"UserId","FirstName","LastName","Email","PassWord","isAdmin"
+            {" FoodboxId","TypeOfFood","FoodName","pricerice","RestaurantId","PurchaseNumber","Buy"
 
             };
 }
@@ -68,10 +68,39 @@ tfoot td {
   color: #8a97a0;
 }
 
+button{
+background-color: #c2fbd7;
+border-radius: 50px;
+border-width: 0;
+box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
+color: green;
+cursor: pointer;
+display: inline-block;
+font-family: Arial,sans-serif;
+font-size: 1em;
+height: 50px;
+padding: 0 25px;
+transition: all 200ms;
+
+
+transform: scale(1.05);
+}
+
+button:hover{background-color: #afe6c3;}
+
+
+
 </style>
 
 <div class="text-center">
     <h1 class="display-4">UserFrontend</h1>
+        <form name="NameForm" id="NameForm" method="post">
+            Name:
+             <br />
+             <input name="Name" type="text" class="form-control input-lg" autofocus required />
+              <br />
+             <input id="OKButton" type="submit" value="Search" class="btn btn-info" />
+        </form>
        <table style="">
           <tr>
                @{
@@ -81,24 +110,20 @@ tfoot td {
                     }
                  }
           </tr>
-          <tr>
               @foreach (var userList in Model.usersLists)
-               {
-                 <td>@userList.userId</td>
-                 <td>@userList.firstName </td>
-                 <td>@userList.lastName</td>
-                 <td>@userList.email</td>
-                 <td>@userList.passWord</td>
-                 <td>@userList.isAdmin</td>
+               {  <tr>
+                      <td>@userList.foodboxId</td>
+                     <td>@userList.typeOfFood </td>
+                     <td>@userList.foodName</td>
+                     <td>@userList.price</td>
+                     <td>@userList.restaurantId</td>
+                     <td>@userList.purchaseNumber</td>
+                     <td><button>Buy</button></td>
+                    
+
+               </tr>
+                 
                 }   
-          </tr>
-          <tr>
-                <td>2</td>
-                <td>Francisco </td>
-                <td>Chang</td>
-                <td>Chang@gmail.com</td>
-                <td>Chang123</td>
-                <td>True</td>
-          </tr>
+         
     </table>
 </div>

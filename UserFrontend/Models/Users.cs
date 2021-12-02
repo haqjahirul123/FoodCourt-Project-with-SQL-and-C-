@@ -6,18 +6,19 @@ namespace UserFrontend.Models
 {
     public class Users
     {
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string email { get; set; }
-        public string userId { get; set; }
-        public string passWord { get; set; }
-        public string isAdmin { get; set; }
-        public List<Users> GetUsersInfo()
+        public string typeOfFood { get; set; }
+        public string foodName { get; set; }
+        public string price { get; set; }
+        public string foodboxId { get; set; }
+        public string restaurantId { get; set; }
+        public string purchaseNumber { get; set; }
+        public List<Users> GetUsersInfo(List<Users> firstName)
         {
             string connectionString = "Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog= FoodRescue_ProjectDatabase_REAL ; Integrated Security=True";
             SqlConnection con = new SqlConnection(connectionString);
             con.Open();
-            string sqlQuery = "Select FirstName, LastName,Email,UserId, Password, isAdmin From UserPrivateInfos Where UserId =2";
+            //string sqlQuery = "Select FirstName, LastName,Email,UserId, Password, isAdmin From UserPrivateInfos Where UserId =1 ";
+            string sqlQuery = "Select FoodboxId, FoodName,Price,TypeOfFood,PurchaseNumber, RestaurantId From FoodBoxes ";
             SqlCommand cmd = new SqlCommand(sqlQuery, con);
             SqlDataReader dr = cmd.ExecuteReader();
 
@@ -27,12 +28,12 @@ namespace UserFrontend.Models
             while (dr.Read())
             {
                 Users users = new Users();
-                users.firstName = dr["FirstName"].ToString();
-                users.lastName = dr["lastName"].ToString();
-                users.email = dr["Email"].ToString();
-                users.userId = dr["UserId"].ToString();
-                users.passWord = dr["Password"].ToString();
-                users.isAdmin = dr["isAdmin"].ToString();
+                users.typeOfFood = dr["TypeOfFood"].ToString();
+                users.foodName = dr["FoodName"].ToString();
+                users.price = dr["Price"].ToString();
+                users.foodboxId = dr["FoodboxId"].ToString();
+                users.purchaseNumber = dr["PurchaseNumber"].ToString();
+                users.restaurantId = dr["RestaurantId"].ToString();
 
                 usersInfoList.Add(users);
             }
