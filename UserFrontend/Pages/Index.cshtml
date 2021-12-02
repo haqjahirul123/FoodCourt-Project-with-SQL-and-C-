@@ -3,41 +3,102 @@
 @{
     ViewData["Title"] = "Home page";
     string[] tableHeaders = new string[]
-            {"UserId","FirstName","LastName","Email"
+            {"UserId","FirstName","LastName","Email","PassWord","isAdmin"
 
             };
 }
 <style>
-table, th, td {
+/*table, th, td {
   border:1px solid black;
   width:auto;
+}*/
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  color: #384047;
+}
+
+table {
+  max-width: 960px;
+  margin: 10px auto;
+}
+
+caption {
+  font-size: 1.6em;
+  font-weight: 400;
+  padding: 10px 0;
+}
+
+ th {
+  font-weight: 400;
+  background: #8a97a0;
+  color: #FFF;
+}
+
+tr {
+  background: #f4f7f8;
+  border-bottom: 1px solid #FFF;
+  margin-bottom: 5px;
+}
+
+tr:nth-child(even) {
+  background: #e8eeef;
+}
+
+th, td {
+  text-align: left;
+  padding: 20px;
+  font-weight: 300;
+}
+
+tfoot tr {
+  background: none;
+}
+
+tfoot td {
+  padding: 10px 2px;
+  font-size: 0.8em;
+  font-style: italic;
+  color: #8a97a0;
+}
+
 </style>
+
 <div class="text-center">
     <h1 class="display-4">UserFrontend</h1>
-
-
-   <table style="">
-  <tr>
-            @{
-                foreach(var tableHeader in tableHeaders)
-                {
-                    <th>@tableHeader</th>
-                }
-            }
-   
-  </tr>
-  <tr>
-    <td>@Model.userId</td>
-    <td>@Model.firstName </td>
-    <td>@Model.lastName</td>
-     <td>@Model.email</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Francisco </td>
-    <td>Chang</td>
-     <td>Chang@gmail.com</td>
-  </tr>
-</table>
+       <table style="">
+          <tr>
+               @{
+                 foreach(var tableHeader in tableHeaders)
+                 {
+                  <th>@tableHeader</th>
+                    }
+                 }
+          </tr>
+          <tr>
+              @foreach (var userList in Model.usersLists)
+               {
+                 <td>@userList.userId</td>
+                 <td>@userList.firstName </td>
+                 <td>@userList.lastName</td>
+                 <td>@userList.email</td>
+                 <td>@userList.passWord</td>
+                 <td>@userList.isAdmin</td>
+                }   
+          </tr>
+          <tr>
+                <td>2</td>
+                <td>Francisco </td>
+                <td>Chang</td>
+                <td>Chang@gmail.com</td>
+                <td>Chang123</td>
+                <td>True</td>
+          </tr>
+    </table>
 </div>
