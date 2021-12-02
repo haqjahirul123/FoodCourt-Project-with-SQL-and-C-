@@ -111,4 +111,21 @@ public class RestaurantBackend
 
         return ctx.Restaurants.Find(_restaurantId);
     }
+
+    /// <summary>
+    /// Ta fram alla osålda matlådor
+    /// </summary>
+    /// <returns> En lista med osålda foodboxes för inloggade restaurangen </returns>
+    public List<FoodBox> GetUnsoldFoodBoxes()
+    {
+        using var ctx = new FoodRescue_DbContext(_databaseName);
+
+        var query = ctx.FoodBoxes
+            .Include(f => f.Restaurant)
+            .Where(f => f.Restaurant.RestaurantId == _restaurantId
+                        && f.Purchase == null)
+            .OrderBy(f => f.Purchase.DateOfPurchase);
+
+        return query.ToList();
+    }
 }
