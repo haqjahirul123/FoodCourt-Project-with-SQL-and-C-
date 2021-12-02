@@ -80,6 +80,50 @@ void CreateDatabase()
 }
 #endregion
 
+#region See all sold foodpackages for a your restaurant
+
+void FindAllSoldFoodPackagesForYourRestaurant()
+{
+    string restaurantId = "FoodRescue_ProjectDatabase_REAL";
+    string databaseName = "FoodRescue_ProjectDatabase_REAL";
+    var restaurant = new RestaurantBackend(1, databaseName);
+
+    restaurant.GetLoggedInRestaurantInfo();
+
+    var soldpackages = restaurant.GetSoldFoodBoxes();
+
+    foreach (var s in soldpackages)
+    {
+        Console.WriteLine($"ID: {s.FoodboxId}, \n" +
+                          $" Meal: {s.FoodName}, \n " +
+                          $"Catogory: {s.TypeOfFood}, \n" +
+                          $" Cost: {s.Price}, \n " +
+                          $"{s.Restaurant} \n ");
+    }
+
+}
+Console.Clear();
+
+#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #region Option 0 (leaving the program)
 bool ExitProgramPrompt()
 {
