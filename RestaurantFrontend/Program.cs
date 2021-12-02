@@ -107,6 +107,96 @@ Console.Clear();
 #endregion
 
 
+#region AddNewFoodBox
+
+void AddNewFoodBox()
+{
+    string FoodName = "";
+    string TypeOfFood = "";
+    decimal price = 0;
+    bool loop = true;
+
+    while (loop)
+    {
+        while (loop)
+        {
+            Console.Clear();
+            // adding the meal with condition 
+            Console.WriteLine("\n \t Enter a new meal\n\n\t\t");
+            FoodName = Console.ReadLine();
+            if (FoodName.Length < 2 || FoodName.Length > 30)
+            {
+                Console.WriteLine("\n \t Your meal name has to be between 2 and 30 chars" +
+                                  "Press enter to try again");
+                Console.ReadKey();
+            }
+            else
+            {
+                loop = false;
+            }
+        }
+
+        loop = true;
+
+        while (loop)
+        {
+            Console.Clear();
+
+            // adding a catogory with condition
+            Console.WriteLine("\n \t Enter the type of the meal \n\n\t\t ");
+            TypeOfFood = Console.ReadLine();
+
+            if (TypeOfFood.Length < 2 || TypeOfFood.Length > 20)
+            {
+                Console.WriteLine(" \n \t Your catogory name has to be between 2 and 20" +
+                                  "Press enter to try again");
+                Console.ReadKey();
+            }
+            else
+            {
+                loop = false;
+            }
+        }
+
+        loop = true;
+
+        while (loop)
+        {
+            Console.Clear();
+
+            // adding a price 
+            Console.WriteLine("\n \t Enter the price for the meal");
+
+            price = decimal.Parse(Console.ReadLine());
+
+            break;
+        }
+
+        string restaurantId = "FoodRescue_ProjectDatabase_REAL";
+        string databaseName = "FoodRescue_ProjectDatabase_REAL";
+        var restaurant = new RestaurantBackend(1, databaseName);
+
+        restaurant.AddFoodBox(FoodName, TypeOfFood, price);
+
+        Console.WriteLine($"\t the {FoodName} has been added to the database successfully \t \n " +
+                           "\t Here comes all of the foodpackages available in the restaurant \n \n \n");
+
+        var allFoodPackages = restaurant.GetAllFoodBoxes();
+
+        foreach (var f in allFoodPackages)
+        {
+            Console.WriteLine($"ID: {f.FoodboxId}, \t Meal: {f.FoodName},  \t \t  Catagory:{f.TypeOfFood},  \t \t Cost: {f.Price},  \t \t  {f.Restaurant}");
+        }
+
+        break;
+    }
+
+    Console.WriteLine(" \n \n \n Press ENTER to go back to the main menu");
+    Console.ReadKey();
+
+}
+#endregion
+
 
 
 
