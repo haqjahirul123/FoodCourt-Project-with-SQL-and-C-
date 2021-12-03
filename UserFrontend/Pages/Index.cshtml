@@ -30,7 +30,7 @@ caption {
  th {
   font-weight: 400;
   background: #8a97a0;
-  color:black;
+  color:;
 }
 tr {
   background: #f4f7f8;
@@ -108,7 +108,7 @@ button:hover{background-color: #afe6c3;}
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <button asp-page="./Edit" asp-route-id="@item.FoodboxId">Buy</button>
+               <button> <a asp-page="./Edit" asp-route-id="@item.FoodboxId">Buy</a></button>
             </td>
         </tr>
 }
