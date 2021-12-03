@@ -1,8 +1,9 @@
 ﻿using DataLayer.Backend;
+using DataLayer.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
-using UserFrontend.Models;
+//using UserFrontend.Models;
 
 namespace UserFrontend.Pages
 {
@@ -14,7 +15,7 @@ namespace UserFrontend.Pages
         public async Task OnGetAsync()
         {
             User = new UserBackend(1, Program.DatabaseName);
-            FoodBox = User.GetUnsoldFoodBoxes("Kött");
+            FoodBox = User.GetUnsoldFoodBoxes("kött");
         }
     }
 }
