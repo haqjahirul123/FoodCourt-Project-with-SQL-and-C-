@@ -12,11 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSuite", "TestSuite\TestSuite.csproj", "{93CF6DAE-5E06-45BD-B300-08649CFD84D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminFrontend", "AdminFrontend\AdminFrontend.csproj", "{34D0E85C-0EDF-4DF5-9D54-768435B57DF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminFrontend", "AdminFrontend\AdminFrontend.csproj", "{34D0E85C-0EDF-4DF5-9D54-768435B57DF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginClient", "LoginClient\LoginClient.csproj", "{62B32EE4-847C-4ADB-ABF7-D4D75E5EAA1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoginClient", "LoginClient\LoginClient.csproj", "{62B32EE4-847C-4ADB-ABF7-D4D75E5EAA1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserFrontend", "UserFrontend\UserFrontend.csproj", "{399805CF-EC09-48E5-9286-27FACEE5C3BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserFrontend", "UserFrontend\UserFrontend.csproj", "{399805CF-EC09-48E5-9286-27FACEE5C3BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

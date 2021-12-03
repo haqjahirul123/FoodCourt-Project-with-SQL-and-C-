@@ -1,128 +1,48 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
-    string[] tableHeaders = new string[]
-            {" FoodboxId","TypeOfFood","FoodName","pricerice","RestaurantId","PurchaseNumber","Buy"
-
-            };
-}
-<style>
-/*table, th, td {
-  border:1px solid black;
-  width:auto;
-}*/
-
-*, *:before, *:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+    ViewData["Title"] = "Foodboxes";
 }
 
-body {
-  font-family: 'Nunito', sans-serif;
-  color: #384047;
+<h1>Foodboxes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodBox[0].TypeOfFood)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodBox[0].FoodName)
+            </th>
+            <th>
+                @Html.DisplayName("Restaurant")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodBox[0].Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.FoodBox) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeOfFood)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoodName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Restaurant.RestaurantName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.FoodboxId">Buy</a>
+            </td>
+        </tr>
 }
-
-table {
-  max-width: 960px;
-  margin: 10px auto;
-}
-
-caption {
-  font-size: 1.6em;
-  font-weight: 400;
-  padding: 10px 0;
-}
-
- th {
-  font-weight: 400;
-  background: #8a97a0;
-  color: #FFF;
-}
-
-tr {
-  background: #f4f7f8;
-  border-bottom: 1px solid #FFF;
-  margin-bottom: 5px;
-}
-
-tr:nth-child(even) {
-  background: #e8eeef;
-}
-
-th, td {
-  text-align: left;
-  padding: 20px;
-  font-weight: 300;
-}
-
-tfoot tr {
-  background: none;
-}
-
-tfoot td {
-  padding: 10px 2px;
-  font-size: 0.8em;
-  font-style: italic;
-  color: #8a97a0;
-}
-
-button{
-background-color: #c2fbd7;
-border-radius: 50px;
-border-width: 0;
-box-shadow: rgba(25,25,25,.04) 0 0 1px 0,rgba(0,0,0,.1) 0 3px 4px 0;
-color: green;
-cursor: pointer;
-display: inline-block;
-font-family: Arial,sans-serif;
-font-size: 1em;
-height: 50px;
-padding: 0 25px;
-transition: all 200ms;
-
-
-transform: scale(1.05);
-}
-
-button:hover{background-color: #afe6c3;}
-
-
-
-</style>
-
-<div class="text-center">
-    <h1 class="display-4">UserFrontend</h1>
-        <form name="NameForm" id="NameForm" method="post">
-             <br />
-             <input name="Name" type="text" class="form-control input-lg" autofocus required />
-              <br />
-             <input id="OKButton" type="submit" value="Search" class="btn btn-info" />
-        </form>
-       <table style="">
-          <tr>
-               @{
-                 foreach(var tableHeader in tableHeaders)
-                 {
-                  <th>@tableHeader</th>
-                    }
-                 }
-          </tr>
-              @foreach (var userList in Model.usersLists)
-               {  <tr>
-                      <td>@userList.foodboxId</td>
-                     <td>@userList.typeOfFood </td>
-                     <td>@userList.foodName</td>
-                     <td>@userList.price</td>
-                     <td>@userList.restaurantId</td>
-                     <td>@userList.purchaseNumber</td>
-                     <td><button>Buy</button></td>
-                    
-
-               </tr>
-                 
-                }   
-         
-    </table>
-</div>
+    </tbody>
+</table>
