@@ -17,6 +17,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoginClient", "LoginClient\LoginClient.csproj", "{62B32EE4-847C-4ADB-ABF7-D4D75E5EAA1D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserFrontend", "UserFrontend\UserFrontend.csproj", "{399805CF-EC09-48E5-9286-27FACEE5C3BF}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantFrontend", "RestaurantFrontend\RestaurantFrontend.csproj", "{6F9904FA-4B26-4B66-80E0-365D08C5067B}"
 EndProject
 Global
