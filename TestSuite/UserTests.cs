@@ -1,5 +1,11 @@
+using DataLayer.Backend;
 using DataLayer.Data;
 using Xunit;
+using System.Collections.Generic;
+using System.Linq;
+using DataLayer.Model;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace TestSuite
 {
@@ -7,18 +13,30 @@ namespace TestSuite
     {
 
         private const string DatabaseName = "FoodRescue_ProjectDatabase_TEST";
+        //private  LoginBackend _loginBackend;
+
+   
 
         [Fact]
-
-        public void CheckFoodBoxesAreExistForBuy()
+        public void TestUnsoldFoodboxes()
         {
-            using var ctx = new FoodRescue_DbContext(DatabaseName);
+            AdminBackend adminBackend = new AdminBackend(DatabaseName);
+            UserBackend userBackend = new UserBackend(1,DatabaseName);
 
-            var foodBoxesExist = ctx.FoodBoxes.Find(2);
-            //var foodType2 = ctx.FoodBoxes
-            Assert.NotNull(foodBoxesExist);
-         
+            adminBackend.CreateAndSeedDb();
+
+            List<FoodBox> test = userBackend.GetUnsoldFoodBoxes("Kött");
+
+            Assert.Null(test[0].Purchase);
+            Assert.Null(test[1].Purchase);
+            Assert.Null(test[2].Purchase);
+            Assert.Null(test[3].Purchase);
+
+            //List<FoodBox> meatTest = userBackend.ListUnsoldFoodBoxesOnType("Meat");
+
+            Assert.Equal("Cheese Burger", test[0].FoodName);
         }
+
 
     }
 }
