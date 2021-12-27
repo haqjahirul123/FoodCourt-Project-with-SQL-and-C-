@@ -73,7 +73,7 @@
             this.loginButton.TabIndex = 2;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            this.loginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // emailLabel
             // 
@@ -119,7 +119,7 @@
             this.loginRestaurantButton.TabIndex = 7;
             this.loginRestaurantButton.Text = "Login";
             this.loginRestaurantButton.UseVisualStyleBackColor = true;
-            this.loginRestaurantButton.Click += new System.EventHandler(this.loginRestaurantButton_Click);
+            this.loginRestaurantButton.Click += new System.EventHandler(this.LoginRestaurantButton_Click);
             // 
             // restaurantPasswordTextBox
             // 
