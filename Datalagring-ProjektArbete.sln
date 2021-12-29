@@ -7,6 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{17C90AF7-22A3-44C1-8AC9-36916697786A}"
 	ProjectSection(SolutionItems) = preProject
+		jahirulHaq.md = jahirulHaq.md
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -18,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoginClient", "LoginClient\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserFrontend", "UserFrontend\UserFrontend.csproj", "{399805CF-EC09-48E5-9286-27FACEE5C3BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantFrontend", "RestaurantFrontend\RestaurantFrontend.csproj", "{6F9904FA-4B26-4B66-80E0-365D08C5067B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestaurantFrontend", "RestaurantFrontend\RestaurantFrontend.csproj", "{6F9904FA-4B26-4B66-80E0-365D08C5067B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
