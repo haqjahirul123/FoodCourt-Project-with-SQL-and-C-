@@ -1,13 +1,25 @@
 ## How did the planning go?
-*We met onfor  brainstorming  where we discussed the advantages and disadvantages of exist  database project. We decided to take kim's which was simple and clear which gives us a great chance to focus on the frontend.Since we had different ideas about what we wanted to focus on the most, I took UserFrontend. I had already made a WebApp so I thought I would train more on UI and work with WebApp.
-Then we set up a database,  we created a ridge to work by. We also did a work planning  and we created a Kanban to monitor our works. This is to clearly include our time expectations.
-During the week we peppered each other, worked with our different UI. I finished my  design part on early of the first week. But I had little left to do on features in it .I discussed things with others team members and I got help from them to solved it.
-On begining of second week  we met online and did tests, so the planning went well and we followed it. What did not go completely was that I got some technical problem  so could not  put it together. But we talked, finished our parts, realized we  had missed a couple of methods that we had to add.
-Then if we had the chance, we would talk and try to do it again a bit to have tests that do not affect each other.The planning in a group like this has worked super well, everyone has been there if any questions arise.First week of december  we ran a refactor together over liveshare and took the opportunity to remove some method, clean up the code, change some variable names, talk through it. This piece felt very good to put together.
-*
+We met onfor  brainstorming  where we discussed the advantages and disadvantages of exist  database project. We decided to take kim's which was simple and clear which gives us a great chance to focus on the frontend.Since we had different ideas about what we wanted to focus on the most, I took UserFrontend.
+I had already made a WebApp so I thought I would train more on UI and work with WebApp.
+Then we set up a database,  we created a ridge to work by. We also did a work planning  and we created a Kanban to monitor our works.
+This is to clearly include our time expectations.
+During the week we peppered each other, worked with our different UI. 
+I finished my  design part on early of the first week. But I had little left to do on features in it .
+I discussed things with others team members and I got help from them to solved it.
+On begining of second week  we met online and did tests, so the planning went well and we followed it. 
+What did not go completely was that I got some technical problem  so could not  put it together. 
+But we talked, finished our parts, realized we  had missed a couple of methods that we had to add.
+Then if we had the chance, we would talk and try to do it again a bit to have tests that do not affect each other.
+The planning in a group like this has worked super well, everyone has been there if any questions arise.
+First week of december  we ran a refactor together over liveshare and took the opportunity to remove some method, clean up the code, change some variable names, talk through it. 
+This piece felt very good to put together.
+
 
 ##What can be done better?
-*I had personally been able to realize earlier that WebForm can not do everything that I want. So could have been less frustrated. Then the disadvantage of us being self-sufficient is that there was a little more coding on our own, even if there is dialogue and studies we sit together. Which is probably how it looks many times in joint projects. The result might have been a little more homogeneous, but each part does what it is supposed to be.*
+I had personally been able to realize earlier that WebForm can not do everything that I want.
+So could have been less frustrated. Then the disadvantage of us being self-sufficient is that there was a little more coding on our own, 
+even if there is dialogue and studies we sit together.
+Which is probably how it looks many times in joint projects. The result might have been a little more homogeneous, but each part does what it is supposed to be.
 
 ##How did the implementation go?
 *When we chose a simple and clear code, it was quite easy to make a frontend to the database. There were times we had to adjust a bit in the code and at least I had to add a couple of methods to get lists of certain things. But this was still quick and easy with the code that existed from the beginning. Implementing WebForm was a journey in itself to understand how it works, that a click is like hitting the console, and so on. But  it was a really fun and opportunity to gain experience*
