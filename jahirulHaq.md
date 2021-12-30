@@ -1,5 +1,6 @@
 ## How did the planning go?
-We met onfor  brainstorming  where we discussed the advantages and disadvantages of exist  database project. We decided to take kim's which was simple and clear which gives us a great chance to focus on the frontend.Since we had different ideas about what we wanted to focus on the most, I took UserFrontend.
+We met online for  brainstorming  where we discussed the advantages and disadvantages of existing databases . We decided to take kim's which was simple and clear which gives us a great chance to focus on the frontend.
+Since we had different ideas about what we wanted to focus on the most, I took UserFrontend.
 I had already made a WebApp so I thought I would train more on UI and work with WebApp.
 Then we set up a database,  we created a ridge to work by. We also did a work planning  and we created a Kanban to monitor our works.
 This is to clearly include our time expectations.
